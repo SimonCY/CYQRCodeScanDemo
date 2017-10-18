@@ -59,6 +59,12 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self requestAccessForScannerCamera];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -82,6 +88,31 @@
 //    NSLog(@"QRCode scan VC dealloc and this is a dead line ------------------------------------------------");
 }
 
+#pragma mark - pravite
+
+/** 相机是否可用  不可用给出提示 */
+- (void)requestAccessForScannerCamera {
+ 
+    //判断用户是否开启了相机权限
+    AVAuthorizationStatus authStatus =  [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied){
+        
+        UIAlertController *choosePhotoAlert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请为APP开放访问相机权限" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [choosePhotoAlert addAction:sure];
+        [choosePhotoAlert addAction:cancel];
+        [self presentViewController:choosePhotoAlert animated:YES completion:nil];
+    }
+}
 
 #pragma mark - contentView delegate
 

@@ -53,8 +53,7 @@
 
 /** setup session and preview layer. */
 - (void)setupSessionWithMetadataObjectTypes:(NSArray *)metadataObjectTypes parentView:(UIView *)parentView rectOfInterest:(CGRect)rect;
-
-
+ 
 - (void)playSoundWithName:(NSString *)name;
 
 - (void)startSession;

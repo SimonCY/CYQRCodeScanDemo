@@ -128,7 +128,7 @@ static id _instance;
 }
 
 #pragma mark - public
-
+ 
 - (void)startSession {
     
     [self.session startRunning];
