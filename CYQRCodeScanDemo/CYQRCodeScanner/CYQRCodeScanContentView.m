@@ -16,10 +16,13 @@
 
 @property (nonatomic,strong) UIButton *flashlightBtn;
 
+@property (nonatomic,strong) UIActivityIndicatorView *indicatorView;
+
 @property (nonatomic,strong) NSTimer *timer;
 
 /** clearColor area frame */
 @property (nonatomic,assign) CGRect scanRect;
+
 
 
 
@@ -147,6 +150,9 @@
         self.flashlightBtn.alpha = 0;
         [self.flashlightBtn addTarget:self action:@selector(flashlightBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.flashlightBtn];
+        
+        self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [self addSubview:self.indicatorView];
     }
     return self;
 }
@@ -167,6 +173,7 @@
     CGFloat flashlightY = CGRectGetMaxY(self.scanRect) - flashlightWH - margin / 3;
     self.flashlightBtn.frame = CGRectMake(flashlightX, flashlightY, flashlightWH, flashlightWH);
     
+    self.indicatorView.center = self.center;
 }
 
 #pragma mark - setter
@@ -274,12 +281,12 @@
 
 - (void)startLoadingAnimating {
     
-    
+    [self.indicatorView startAnimating];
 }
 
 - (void)stopLoadingAnimation {
     
-    
+    [self.indicatorView stopAnimating];
 }
 
 @end

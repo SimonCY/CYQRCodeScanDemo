@@ -24,8 +24,10 @@
 
 - (instancetype)initWithScanRect:(CGRect)scanRect;
 
+/** if falshlightBtnHiden setted yes ,scanAnimating will be auto starting */
 - (void)startScanAnimating;
 
+/** if falshlightBtnHiden setted NO ,scanAnimating will be auto stopped */
 - (void)stopScanAnimating;
 
 - (void)startLoadingAnimating;

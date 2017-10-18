@@ -7,10 +7,9 @@
 //
 
 #import "CYQRCodeScanViewController.h"
-#import "CYQRCodeScanManager.h"
 #import "CYQRCodeScanContentView.h"
 
-@interface CYQRCodeScanViewController ()<CYQRCodeScanManagerDelegate,CYQRCodeScanContentViewDelegate>
+@interface CYQRCodeScanViewController ()<CYQRCodeScanContentViewDelegate>
 
 @property (nonatomic,strong) CYQRCodeScanManager *scanManager;
 
@@ -51,9 +50,6 @@
     self.contentView = [[CYQRCodeScanContentView alloc] initWithScanRect:self.scanRect];
     self.contentView.delegate = self;
     [self.view addSubview:self.contentView];
- 
-
-    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -67,7 +63,6 @@
     [super viewDidAppear:animated];
     
     [self.scanManager startSession];
-    [self.contentView startScanAnimating];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -84,8 +79,9 @@
 
 - (void)dealloc {
     
-    NSLog(@"QRCode scan VC dealloc and this is a dead line ------------------------------------------------");
+//    NSLog(@"QRCode scan VC dealloc and this is a dead line ------------------------------------------------");
 }
+
 
 #pragma mark - contentView delegate
 
