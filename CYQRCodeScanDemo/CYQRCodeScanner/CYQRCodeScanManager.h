@@ -36,6 +36,7 @@
  
  @discussion
  The value of this property is a CGRect that determines the receiver's rectangle of interest for each frame of video. The rectangle's origin is top left and is relative to the coordinate space of the device providing the metadata. Specifying a rectOfInterest may improve detection performance for certain types of metadata. The default value of this property is the value CGRectMake(0, 0, 1, 1). Metadata objects whose bounds do not intersect with the rectOfInterest will not be returned.
+ @notice: The image with Orientation info from avcapture is rotated 90degree. The right format for rectOfInterest is CGRectMake(y, x, height, width) .And it is the percentage of outputed-image but not the screen.
  */
 @property (nonatomic,assign) CGRect rectOfInterest;
 
