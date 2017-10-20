@@ -97,6 +97,13 @@ static id _instance;
     // add input device
     NSError *error = nil;
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    [device lockForConfiguration:nil];
+    [device setFlashMode:AVCaptureFlashModeOff];
+    [device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+    if ([device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]) {
+        [device setWhiteBalanceMode:AVCaptureWhiteBalanceModeAutoWhiteBalance];
+    }
+    [device unlockForConfiguration];
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
     if (error) {
         
